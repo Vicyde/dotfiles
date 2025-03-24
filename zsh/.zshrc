@@ -49,6 +49,8 @@ zstyle ':completion:*' menu select
 
 # Aliases
 alias ls='ls --color'
+alias ll='ls -la --color'
+
 alias grep='grep --color=auto'
 
 alias e='emacsclient -c'
