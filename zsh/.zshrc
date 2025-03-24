@@ -9,7 +9,13 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Shell integrations 
-eval "$(starship init zsh)"
+if [[ -n $DISPLAY ]]; then
+    eval "$(starship init zsh)"
+else
+    autoload -Uz promptinit; promptinit
+    prompt bart
+fi
+
 eval "$(fzf --zsh)"
 
 # Keybindings
