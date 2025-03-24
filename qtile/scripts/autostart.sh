@@ -2,4 +2,3 @@
 
 picom -bc
 emacs --daemon
-shutter
