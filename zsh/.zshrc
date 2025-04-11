@@ -48,10 +48,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu select
 
 # Aliases
+alias grep='grep --color=auto'
+
 alias ls='ls --color'
 alias ll='ls -la --color'
 
-alias grep='grep --color=auto'
+alias tree='tree -C'
 
 alias e='emacsclient -c'
 
