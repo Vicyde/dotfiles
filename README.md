@@ -11,3 +11,5 @@ All my commonly used configuration files in one place.
 | ZSH      | ~/.zshrc                |
 | emacs    | ~/.config/emacs/        |
 | Kitty    | ~/.config/kitty/        |
+| tmux     | ~/.config/tmux/         |
+
