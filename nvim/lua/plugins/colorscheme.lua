@@ -1,12 +1,9 @@
 return {
-  "scottmckendry/cyberdream.nvim",
+  "sainnhe/everforest",
   priority=1000,
   lazy=false,
   config = function()
-    require("cyberdream").setup({
-      transparent = false,
-    })
-
-    vim.cmd("colorscheme cyberdream")
+    vim.g.everforest_enable_italic = true
+    vim.cmd("colorscheme everforest")
   end,
 }
