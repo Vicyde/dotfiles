@@ -14,7 +14,6 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.hlsearch = true
 
-opt.background="dark"
 opt.signcolumn="yes"
 
 opt.splitright = true
