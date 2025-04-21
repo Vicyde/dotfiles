@@ -1,0 +1,60 @@
+@define-color bg #272e33;
+@define-color bg-light #414b50;
+@define-color bg-red #4c3743;
+@define-color bg-green #3c4841;
+@define-color bg-yellow #45443c;
+
+@define-color fg #a7c080;
+
+* {
+  font-family: 'Space Mono Nerd Font';
+  font-size: 16px;
+}
+
+window#waybar {
+  background-color: @bg;
+  color: @fg;
+}
+
+.modules-center {
+  padding-right: 10px;
+}
+
+#clock,
+#pulseaudio,
+#tray,
+#network, 
+#memory,
+#cpu,
+#temperature,
+#backlight,
+#battery {
+  border-radius: 6px;
+  padding: 4px;
+  background-color: @bg-light;
+}
+
+#battery {
+  padding-right: 10px;
+}
+
+#battery.warning {
+  background-color: @bg-yellow;
+}
+
+#battery.critical {
+  background-color: @bg-red;
+}
+
+#network {
+  padding-right: 12px;
+  background-color: @bg-green;
+}
+
+#network.disconnected {
+  background-color: @bg-red;
+}
+
+#cpu {
+  padding-right: 8px;
+}
