@@ -17,12 +17,20 @@
 }
 
 window#waybar {
-  background-color: @bg;
+  background-color: transparent;
   color: @fg;
 }
 
+.modules-left {
+  background-color: @bg;
+  border-radius: 8px;
+  padding: 4px;
+}
+
 .modules-center {
-  padding-right: 10px;
+  background-color: @bg;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 #workspaces {
@@ -55,7 +63,7 @@ window#waybar {
 #temperature,
 #backlight,
 #battery {
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 4px;
   background-color: @bg-light;
 }
