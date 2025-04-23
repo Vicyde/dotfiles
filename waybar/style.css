@@ -33,11 +33,11 @@ window#waybar {
   color: @fg;
 }
 
-#workspaces button.active {
-  background-color: @bg-green;
+#workspaces button.visible {
+  background-color: @bg-yellow;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
   background-color: @bg-green;
 }
 
