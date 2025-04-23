@@ -4,8 +4,12 @@
 @define-color bg-green #3c4841;
 @define-color bg-yellow #45443c;
 
-@define-color fg #a7c080;
+@define-color fg #d3c6aa;
+@define-color fg-green #a7c080;
 @define-color fg-red #e67e80;
+
+@define-color gray1 #859289;
+@define-color gray2 #9da9a0;
 
 * {
   font-family: 'Space Mono Nerd Font';
@@ -19,6 +23,26 @@ window#waybar {
 
 .modules-center {
   padding-right: 10px;
+}
+
+#workspaces {
+  color: transparent;
+}
+
+#workspaces button {
+  color: @fg;
+}
+
+#workspaces button.active {
+  background-color: @bg-green;
+}
+
+#workspaces button.focused {
+  background-color: @bg-green;
+}
+
+#workspaces button.urgent {
+  background-color: @bg-red;
 }
 
 

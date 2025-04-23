@@ -22,7 +22,8 @@
 
     "hyprland/workspaces": {
         "all-outputs": true,
-        "format": "{name}: {icon}",
+        // "format": "{name}: {icon}",
+        "format": "{name}",
         "format-icons": {
             "urgent": "",
             "active": "",
