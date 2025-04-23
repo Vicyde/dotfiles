@@ -20,6 +20,7 @@ window#waybar {
   padding-right: 10px;
 }
 
+
 #clock,
 #pulseaudio,
 #tray,
@@ -32,6 +33,10 @@ window#waybar {
   border-radius: 6px;
   padding: 4px;
   background-color: @bg-light;
+}
+
+#pulseaudio {
+  padding-right: 14px;
 }
 
 #battery {
