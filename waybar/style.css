@@ -5,6 +5,7 @@
 @define-color bg-yellow #45443c;
 
 @define-color fg #a7c080;
+@define-color fg-red #e67e80;
 
 * {
   font-family: 'Space Mono Nerd Font';
@@ -62,4 +63,8 @@ window#waybar {
 
 #cpu {
   padding-right: 8px;
+}
+
+#submap {
+  color: @fg-red;
 }

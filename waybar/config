@@ -5,9 +5,10 @@
         "hyprland/workspaces",
     ],
     "modules-center": [
-        "hyprland/window"
+        "hyprland/window",
     ],
     "modules-right": [
+        "hyprland/submap",
         "pulseaudio",
         "network",
         "cpu",
@@ -27,6 +28,9 @@
             "active": "",
             "default": ""
         }
+    },
+    "hyprland/submap": {
+      "format": "[{}]",
     },
     "tray": {
         "spacing": 10,
