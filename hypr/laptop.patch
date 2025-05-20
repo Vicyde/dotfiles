@@ -1,0 +1,14 @@
+--- hyprland.conf	2025-05-20 22:29:58.185221562 +0200
++++ hyprland_laptop.conf	2025-05-20 22:29:48.706221113 +0200
+@@ -4,8 +4,9 @@
+ ### MONITORS ###
+ ################
+ 
+-# Desktop
+-monitor=,highres,auto,1
++# Laptop
++monitor = eDP-1, highres, auto, 1.25
++monitor = DP-1, highres, auto, 1
+ 
+ ###################
+ ### MY PROGRAMS ###
