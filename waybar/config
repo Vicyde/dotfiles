@@ -1,6 +1,6 @@
 {
-    "height": 38, // Waybar height (to be removed for auto height)
-    "spacing": 4, // Gaps between modules (4px)
+    "height": 24, // Waybar height (to be removed for auto height)
+    "spacing": 2, // Gaps between modules (4px)
     "modules-left": [
         "hyprland/workspaces",
     ],
@@ -76,7 +76,7 @@
     },
     "network": {
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
+        "format-ethernet": "Connected ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",

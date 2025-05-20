@@ -13,7 +13,9 @@
 
 * {
   font-family: 'Space Mono Nerd Font';
-  font-size: 16px;
+  font-size: 18px;
+  padding: 0;
+  margin: 0;
 }
 
 window#waybar {
@@ -23,14 +25,10 @@ window#waybar {
 
 .modules-left {
   background-color: @bg;
-  border-radius: 8px;
-  padding: 4px;
 }
 
 .modules-center {
   background-color: @bg;
-  border-radius: 8px;
-  padding: 10px;
 }
 
 .modules-right {
@@ -38,10 +36,14 @@ window#waybar {
 
 #workspaces {
   color: transparent;
+  padding-left: 2px;
 }
 
 #workspaces button {
   color: @fg;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 0px;
 }
 
 #workspaces button.visible {
@@ -66,17 +68,9 @@ window#waybar {
 #temperature,
 #backlight,
 #battery {
-  border-radius: 8px;
-  padding: 4px;
   background-color: @bg-light;
-}
-
-#pulseaudio {
-  padding-right: 14px;
-}
-
-#battery {
-  padding-right: 10px;
+  padding-left: 8px;
+  padding-right: 12px;
 }
 
 #battery.warning {
@@ -88,16 +82,11 @@ window#waybar {
 }
 
 #network {
-  padding-right: 12px;
   background-color: @bg-green;
 }
 
 #network.disconnected {
   background-color: @bg-red;
-}
-
-#cpu {
-  padding-right: 8px;
 }
 
 #submap {
