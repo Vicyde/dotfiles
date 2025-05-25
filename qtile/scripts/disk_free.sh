@@ -1,2 +1,2 @@
 #!/bin/bash
-df -h | grep "sdb3" | awk '{print $5}'
+df -h | awk '/sdb1/ {print $5}'

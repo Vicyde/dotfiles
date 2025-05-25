@@ -1,6 +1,6 @@
 #!/bin/bash
 
-feh --bg-scale /home/auc/Wallpapers/wp3272764--wallpapers.jpg
+wal -i ~/Wallpapers/wp1813998.jpg 
 
 if [ "$XDG_SESSION_TYPE" = "x11" ]; then
   picom -bc
