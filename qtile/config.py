@@ -9,7 +9,7 @@ from colors import *
 
 mod = "mod4"
 
-# theme=RofiOne
+#theme=RofiOne
 theme='wal'
 
 terminal = "kitty"
@@ -64,6 +64,7 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod], "w", lazy.spawn(rofi_window), desc="Toggle window"),
+    Key([mod, "shift"], "w", lazy.function(run_script, 'rofi_setwallpaper.sh'), desc="Set the wallpaper"),
     Key([mod], "x", lazy.function(run_script, 'rofi_shutdown.sh'), desc="Start the shutdown, reboot or kill selector"),
 
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),

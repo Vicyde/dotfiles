@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-wal -i ~/Wallpapers/wp1813998.jpg 
+wal -i ~/Wallpapers/active
 
 if [ "$XDG_SESSION_TYPE" = "x11" ]; then
   picom -bc
