@@ -1,16 +1,27 @@
 #!/bin/bash
 
-#PLAYERS=$(playerctl -l) # Iterate through all players
-PLAYERS="chromium cmus" # Use a list with players, prioritized 
+# A script that iterates through all values in it's variable, to determine if
+# it is a player, playing something. If it is, we echo what it is playing and
+# exit the script.
+iterate_players() {
+  for PLAYER in $1; do
+    STATUS=$(playerctl status --player=$PLAYER)
+    if [[ $STATUS == "Playing" ]]; then
+      OUTPUT=$(playerctl metadata --player=$PLAYER --format='{{ trunc(artist,25) }} - {{ trunc(title, 25) }}')
+      echo $OUTPUT
+      exit
+    fi
+  done
+}
 
-OUTPUT="Silence"
+# First, iterate through a list of prioritized players
+iterate_players "chromium cmus"
 
-for PLAYER in $PLAYERS; do
-  STATUS=$(playerctl status --player=$PLAYER)
-  if [[ $STATUS == "Playing" ]]; then
-    OUTPUT=$(playerctl metadata --player=$PLAYER --format='{{ trunc(artist,25) }} - {{ trunc(title, 25) }}')
-    break;
-  fi
-done
+# Still in the script? Then we have no prioritized player found, so interate
+# through all of them
+iterate_players $(playerctl -l)
 
-echo $OUTPUT
+# Still nothing? Then it must be silent!
+echo "Silence"
+
+
