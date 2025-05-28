@@ -181,6 +181,8 @@ screens = [ Screen(
 		    },
 		    name_transform=lambda name: name.upper(),
 		),
+		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
+		widget.GenPollCommand(cmd="/home/auc/.config/qtile/scripts/widget_playing.sh", fmt="{}", update_interval=1),
 		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
 		widget.GenPollCommand(cmd="/home/auc/.config/qtile/scripts/widget_nordvpn.sh", fmt="{}", update_interval=5),
 		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
