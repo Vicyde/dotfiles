@@ -1,4 +1,7 @@
 #!/bin/bash
+# Currently Playing Script
+# by Vicyde
+
 
 # A script that iterates through all values in it's variable, to determine if
 # it is a player, playing something. If it is, we echo what it is playing and

@@ -54,7 +54,7 @@ format = '[[ $symbol ($version) ](fg:#9da9a0 bg:#2e383c)]($style)'
 [python]
 symbol = "🐍"
 style = "bg:#2e383c"
-format = '[[ $symbol ($version) ](fg:#9da9a0 bg:#2e383c)]($style)'
+format = '[[ $symbol ${pyenv_prefix} ($version) \($virtualenv\) ](fg:#9da9a0 bg:#2e383c)]($style)'
 
 [time]
 disabled = false

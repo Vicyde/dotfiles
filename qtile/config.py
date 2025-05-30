@@ -2,7 +2,7 @@ import os
 import subprocess
 
 from libqtile import bar, layout, qtile, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen, KeyChord, DropDown, ScratchPad
+from libqtile.config import Click, Drag, Group, Key, Match, Rule, Screen, KeyChord, DropDown, ScratchPad
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from colors import *
@@ -33,7 +33,6 @@ def unminimize_all(group):
     for win in group.windows:
         if win.minimized:
             win.toggle_minimize()
-
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -72,10 +71,10 @@ keys = [
     Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
 
 #    KeyChord([mod], "s", [
-#	Key([], "t", lazy.spawn(terminal)),
-#	Key([], "b", lazy.spawn(browser)),
-#	],
-#	name="Spawn"
+#        Key([], "t", lazy.spawn(terminal)),
+#        Key([], "b", lazy.spawn(browser)),
+#        ],
+#        name="Spawn"
 #    )
 ]
 
@@ -90,18 +89,16 @@ for vt in range(1, 8):
     ])
 
 group_names = [i for i in "1234567890"]
-
-#group_labels = ["DEV", "WWW", "SYS", "DOC", "COM", "6", "7", "8", "9", "MISC"]
-group_labels = ["1: DEV", "2: WWW", "3: SYS", "4: DOC", "5: COM", "6", "7", "8", "9", "0: MISC"]
+group_labels = ["1: DEV", "2: WWW", "3: SYS", "4: COM", "5", "6", "7", "8", "9", "0: MISC"]
 #group_labels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
 groups = []
 for i in range(len(group_names)):
     groups.append(
-	Group(
-	    name=group_names[i],
-	    label=group_labels[i],
-	)
+        Group(
+            name=group_names[i],
+            label=group_labels[i],
+        )
     )
 
 
@@ -151,6 +148,7 @@ layouts = [
     layout.MonadTall(ratio=0.65, align=layout.MonadTall._right, **layoutSettings),
     layout.MonadThreeCol(**layoutSettings),
     layout.MonadWide(**layoutSettings),
+    layout.Bsp(**layoutSettings),
 ]
 
 widget_defaults = dict (
@@ -184,7 +182,7 @@ screens = [ Screen(
 		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
 		widget.GenPollCommand(cmd="/home/auc/.config/qtile/scripts/widget_playing.sh", fmt="{}", update_interval=1),
 		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
-		widget.GenPollCommand(cmd="/home/auc/.config/qtile/scripts/widget_nordvpn.sh", fmt="{}", update_interval=5),
+		widget.GenPollCommand(cmd="/home/auc/.config/qtile/scripts/widget_nordvpn.sh", fmt="{}", update_interval=5, markup=True),
 		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
 		widget.GenPollCommand(cmd="/home/auc/.config/qtile/scripts/widget_disk_free.sh", fmt="{}", update_interval=5),
 		widget.TextBox("", foreground=get_color(theme, "bar_foreground2")),
@@ -213,20 +211,16 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+dgroups_app_rules = [
+]  # type: list
+follow_mouse_focus = "click_or_drag_only"
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
 floating_layout = layout.Floating(
     float_rules=[
 	*layout.Floating.default_float_rules,
-	Match(wm_class="confirmreset"),  # gitk
-	Match(wm_class="makebranch"),  # gitk
-	Match(wm_class="maketag"),  # gitk
-	Match(wm_class="ssh-askpass"),  # ssh-askpass
-	Match(title="branchdialog"),  # gitk
-	Match(title="pinentry"),  # GPG key password entry
+         Match(wm_class="explorer.exe"), # Wine desktop
     ]
 )
 auto_fullscreen = True
