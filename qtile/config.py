@@ -19,9 +19,13 @@ rofi_window = "rofi -show window -show-icons"
 
 colors = init_colors('/home/auc/.cache/wal/colors')
 
-def run_script(qtile, script):
+@lazy.function
+def run_script(qtile, script, *args):
     run_command = os.path.expanduser('~/.config/qtile/scripts/' + script)
-    subprocess.call(run_command)
+    full_command = [run_command]
+    for a in args:
+        full_args.append(a)
+    subprocess.call(full_command)
 
 @hook.subscribe.startup_once
 def autostart_once():
@@ -29,10 +33,21 @@ def autostart_once():
     subprocess.call(autostart_script)
 
 @lazy.group.function
-def unminimize_all(group):
+def unminimize_all(group: Group):
     for win in group.windows:
         if win.minimized:
             win.toggle_minimize()
+
+@lazy.function
+def change_label(qtile):
+    notify("Warning", "This function is not yet implemented.")
+
+def ask_user(question):
+    ans = subprocess.run(["/usr/bin/rofi", "-dmenu", "-p", f"{question}"], capture_output=True, text=True)
+    return ans.stdout
+
+def notify(title, message):
+    subprocess.run(["/usr/bin/notify-send", f"{title}", f"{message}"]) 
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -50,32 +65,42 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
-    Key([mod], "a", lazy.function(run_script, 'rofi_setaudio.sh'), desc="Set audio output"),
-    Key([mod], "e", lazy.spawn('emacsclient -c'), desc="Start emacs"),
+    Key([mod, "shift"], "n", lazy.layout.normalize(), desc="Normalizes the layout."),
+    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
+    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+
     Key([mod], "i", lazy.layout.grow(), desc="Grow the layout"),
     Key([mod, "shift"], "i", lazy.layout.shrink(), desc="Shrink the layout"),
-    Key([mod, "shift"], "m", unminimize_all, desc="Unminimize all windows in current group"),
-    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "shift"], "q", lazy.function(run_script, 'lock.sh'), desc="Lock the session"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawn(rofi), desc="Spawn a command using a prompt widget"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+
+    # Scripts
+    Key([mod], "a", run_script('rofi_setaudio.sh'), desc="Set audio output"),
+    Key([mod, "shift"], "w", run_script('rofi_setwallpaper.sh'), desc="Set the wallpaper"),
+    Key([mod], "x", run_script('rofi_shutdown.sh'), desc="Start the shutdown, reboot or kill selector"),
+    Key([mod, "shift"], "q", run_script('lock.sh'), desc="Lock the session"),
+
+    # Spawn commands
+    Key([mod], "e", lazy.spawn('emacsclient -c'), desc="Start emacs"),
     Key([mod], "w", lazy.spawn(rofi_window), desc="Toggle window"),
-    Key([mod, "shift"], "w", lazy.function(run_script, 'rofi_setwallpaper.sh'), desc="Set the wallpaper"),
-    Key([mod], "x", lazy.function(run_script, 'rofi_shutdown.sh'), desc="Start the shutdown, reboot or kill selector"),
-
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
 
-#    KeyChord([mod], "s", [
-#        Key([], "t", lazy.spawn(terminal)),
-#        Key([], "b", lazy.spawn(browser)),
-#        ],
-#        name="Spawn"
-#    )
+    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "r", lazy.spawn(rofi), desc="Spawn a command using a prompt widget"),
+    Key([mod, "shift"], "r", change_label, desc="Spawn a command using a prompt widget"),
+
+
+    Key([mod, "shift"], "m", unminimize_all, desc="Unminimize all windows in current group"),
+    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+
+    KeyChord([mod], "s", [
+        Key([], "t", lazy.spawn(terminal)),
+        Key([], "b", lazy.spawn(browser)),
+        ],
+        name="Spawn"
+    )
 ]
 
 for vt in range(1, 8):
@@ -145,10 +170,10 @@ layoutSettings = {
 }
 
 layouts = [
+    layout.Bsp(**layoutSettings),
     layout.MonadTall(ratio=0.65, align=layout.MonadTall._right, **layoutSettings),
     layout.MonadThreeCol(**layoutSettings),
     layout.MonadWide(**layoutSettings),
-    layout.Bsp(**layoutSettings),
 ]
 
 widget_defaults = dict (
@@ -169,7 +194,7 @@ screens = [ Screen(
 		    this_current_screen_border=get_color(theme, "bar_foreground2"),
 		    inactive=get_color(theme, "bar_foreground4"),
 		),
-		widget.CurrentLayoutIcon(),
+        widget.CurrentLayout(mode='icon'),
 		widget.TextBox("|", foreground=get_color(theme,"bar_foreground2")),
 		widget.Prompt(),
 		widget.WindowName(),
